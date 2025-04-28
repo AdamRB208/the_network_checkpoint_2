@@ -9,5 +9,8 @@ export const AppState = reactive({
   /** @type {import('./models/Post.js').Post[]} user info from the database*/
   post: [],
 
+  currentPage: 1,
+
+  totalPages: 11,
 })
 
