@@ -11,7 +11,7 @@ defineProps({
 
 
 <template>
-  <div class="post-card border border-3 border-networkgrey rounded-4 p-3 mb-4">
+  <div class="post-card border border-3 border-networkgrey rounded-4 p-3 mb-4 mt-4">
     <div class="d-flex">
       <img
         :src="postProp.creator.picture || 'https://em-content.zobj.net/source/apple/419/man-facepalming_1f926-200d-2642-fe0f.png'"

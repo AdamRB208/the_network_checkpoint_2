@@ -12,6 +12,8 @@ const currentPage = computed(() => AppState.currentPage)
 
 const totalPages = computed(() => AppState.totalPages)
 
+const account = computed(() => AppState.account)
+
 onMounted(() => {
   getPosts()
 })
@@ -58,7 +60,7 @@ async function getNextPage(pageNumber) {
   <section class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <form @submit.prevent="createPost()"
+        <form v-if="account" @submit.prevent="createPost()"
           class="border border-3 border-networkgrey rounded-4 w-100 mt-5 mb-5 shadow">
           <div class="mb-2 p-3">
             <h3 class="d-flex justify-content-center">Post Something</h3>
