@@ -8,6 +8,9 @@ import { computed, onMounted, ref } from 'vue';
 
 const posts = computed(() => AppState.post)
 
+const currentPage = computed(() => AppState.currentPage)
+
+const totalPages = computed(() => AppState.totalPages)
 
 onMounted(() => {
   getPosts()
@@ -39,6 +42,16 @@ async function createPost() {
   }
 }
 
+async function getNextPage(pageNumber) {
+  try {
+    await postsService.getNextPage(pageNumber)
+  }
+  catch (error) {
+    Pop.error(error, 'could not get next page');
+    logger.log('COULD NOT GET NEXT PAGE', error)
+  }
+}
+
 </script>
 
 <template>
@@ -59,7 +72,7 @@ async function createPost() {
               maxlength="500" placeholder="Add an image...">
           </div>
           <div class="d-flex flex-row-reverse">
-            <button class="btn btn-outline-networkdark rounded-3 shadow"><i class="mdi mdi-send-circle-outline"
+            <button class="btn btn-outline-networkdark rounded-3 shadow post-btn"><i class="mdi mdi-send-circle-outline"
                 type="submit">Post</i></button>
           </div>
         </form>
@@ -69,6 +82,15 @@ async function createPost() {
       <div v-for="Post in posts" :key="Post.id" class="col-md-8">
         <PostCard :postProp="Post" />
       </div>
+    </div>
+  </section>
+  <section class="container">
+    <div class="row justify-content-center">
+      <button :disabled="currentPage == 1" @click="getNextPage(currentPage - 1)"
+        class="col-md-2 btn btn-outline-networkgrey mb-2">Previous</button>
+      <div class="col-md-2 text-center align-items-center mb-2">Page {{ currentPage }}</div>
+      <button :disabled="currentPage == 11" @click="getNextPage(currentPage + 1)"
+        class="col-md-2 btn btn-outline-networkgrey mb-2">Previous</button>
     </div>
   </section>
 </template>
@@ -83,9 +105,15 @@ form {
 
 }
 
-button {
+.post-btn {
   margin-right: 3rem;
   margin-bottom: 1.5rem;
   ;
+}
+
+button:not(.post-btn) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

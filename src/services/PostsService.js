@@ -20,6 +20,12 @@ class PostsService {
     AppState.post.unshift(post)
   }
 
+  async getNextPage(pageNumber) {
+    const response = await api.get(`api/posts?page=${pageNumber}`)
+    logger.log('Changed page', response.data)
+  }
+
+
 }
 
 export const postsService = new PostsService()
