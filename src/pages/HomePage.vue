@@ -29,8 +29,17 @@ async function getPosts() {
 <template>
   <section class="container">
     <div class="row justify-content-center">
-      <div class="col-12">
-        <h2 class="d-flex justify-content-center m-2">Posts</h2>
+      <div class="col-md-8 p-0">
+        <div class="border border-3 border-networkgrey rounded-4 m-3 w-100 post-form">
+          <div class="mb-3 p-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <div class="mb-3 p-3">
+            <label for="exampleFormControlInput1" class="form-label">Image URL</label>
+            <input type="url" class="form-control" id="exampleFormControlInput1" placeholder="image url here...">
+          </div>
+        </div>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -44,5 +53,9 @@ async function getPosts() {
 <style scoped lang="scss">
 h2 {
   color: rgb(134, 134, 135);
+}
+
+.post-form {
+  background-color: rgba(3, 52, 137, 0.705);
 }
 </style>
