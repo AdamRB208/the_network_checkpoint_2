@@ -1,11 +1,26 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { Post } from '@/models/Post.js';
+import { postsService } from '@/services/PostsService.js';
+import { logger } from '@/utils/Logger.js';
+import { Pop } from '@/utils/Pop.js';
+import { computed } from 'vue';
 
+const account = computed(() => AppState.account)
 
 defineProps({
   postProp: { type: Post, required: true }
 })
 
+async function likePost(postId) {
+  try {
+    await postsService.likePost(postId)
+  }
+  catch (error) {
+    Pop.error(error, 'could not like post');
+    logger.log('COULD NOT LIKE POST', error)
+  }
+}
 
 </script>
 
@@ -25,7 +40,9 @@ defineProps({
       <hr>
       <p class="card-text mt-3 d-flex justify-content-center">{{ postProp.body }}</p>
       <hr>
-      <p class="mb-0 mdi mdi-heart likes-text">{{ postProp.likes.length }}</p>
+      <p v-if="account" @click="likePost(postProp.id)" class="mb-0 mdi mdi-heart likes-text" type="button">{{
+        postProp.likes.length }}
+      </p>
     </div>
   </div>
 </template>

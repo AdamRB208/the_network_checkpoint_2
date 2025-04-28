@@ -29,6 +29,10 @@ class PostsService {
     AppState.totalPages = response.data.totalPages
   }
 
+  async likePost(postId) {
+    const response = await api.post(`api/posts/${postId}/like`)
+    logger.log('liked post', response.data)
+  }
 
 }
 
