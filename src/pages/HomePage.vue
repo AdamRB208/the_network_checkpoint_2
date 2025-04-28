@@ -7,9 +7,11 @@ import { computed, onMounted } from 'vue';
 
 const posts = computed(() => AppState.post)
 
+
 onMounted(() => {
   getPosts()
 })
+
 
 async function getPosts() {
   try {
