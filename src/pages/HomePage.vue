@@ -1,9 +1,11 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { postsService } from '@/services/PostsService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 
+const posts = computed(() => AppState.post)
 
 onMounted(() => {
   getPosts()
@@ -24,8 +26,8 @@ async function getPosts() {
 <template>
   <section class="container">
     <div class="row">
-      <div class="col-md-10">
-        <div>Home Page</div>
+      <div v-for="Post in posts" :key="Post.id" class="col-md-10">
+        <div>{{ posts }}</div>
       </div>
     </div>
   </section>
