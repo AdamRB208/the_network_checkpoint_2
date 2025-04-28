@@ -5,11 +5,19 @@ import { AppState } from "@/AppState.js"
 
 
 class PostsService {
+
   async getPosts() {
     const response = await api.get('api/posts')
     logger.log('GOT POSTS', response.data)
     const posts = response.data.posts.map(pojo => new Post(pojo))
     AppState.post = posts
+  }
+
+  async createPost(postData) {
+    const response = await api.post('api/posts', postData)
+    logger.log('CREATED POST!', response.data)
+    const post = new Post(response.data)
+    AppState.post.unshift(post)
   }
 
 }

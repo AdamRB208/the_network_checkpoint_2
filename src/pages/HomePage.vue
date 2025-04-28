@@ -4,7 +4,7 @@ import PostCard from '@/components/PostCard.vue';
 import { postsService } from '@/services/PostsService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const posts = computed(() => AppState.post)
 
@@ -13,6 +13,10 @@ onMounted(() => {
   getPosts()
 })
 
+const editablePostData = ref({
+  body: '',
+  imgUrl: ''
+})
 
 async function getPosts() {
   try {
@@ -24,6 +28,16 @@ async function getPosts() {
   }
 }
 
+async function createPost() {
+  try {
+    const postData = editablePostData.value
+    await postsService.createPost(postData)
+  }
+  catch (error) {
+    Pop.error(error, 'could not create post');
+    logger.log('COULD NOT CREATE POST', error)
+  }
+}
 
 </script>
 
@@ -31,17 +45,18 @@ async function getPosts() {
   <section class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <form class="border border-3 border-networkgrey rounded-4 w-100 mt-5 mb-5 shadow">
+        <form @submit.prevent="createPost()"
+          class="border border-3 border-networkgrey rounded-4 w-100 mt-5 mb-5 shadow">
           <div class="mb-2 p-3">
             <h3 class="d-flex justify-content-center">Post Something</h3>
             <label for="body" class="form-label"></label>
-            <textarea class="form-control" id="body" name="body" rows="3" type="text" maxlength="5000" required
-              placeholder="Post here..."></textarea>
+            <textarea v-model="editablePostData.body" class="form-control" id="body" name="body" rows="3" type="text"
+              maxlength="5000" required placeholder="Post here..."></textarea>
           </div>
           <div class="mb-2 p-3">
             <label for="imgUrl" class="form-label"></label>
-            <input type="url" class="form-control" id="imgUrl" name="imgUrl" maxlength="500"
-              placeholder="Add an image...">
+            <input v-model="editablePostData.imgUrl" type="url" class="form-control" id="imgUrl" name="imgUrl"
+              maxlength="500" placeholder="Add an image...">
           </div>
           <div class="d-flex flex-row-reverse">
             <button class="btn btn-outline-networkdark rounded-3 shadow"><i class="mdi mdi-send-circle-outline"
