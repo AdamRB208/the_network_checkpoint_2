@@ -24,22 +24,30 @@ async function getPosts() {
   }
 }
 
+
 </script>
 
 <template>
   <section class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8 p-0">
-        <div class="border border-3 border-networkgrey rounded-4 m-3 w-100 post-form">
-          <div class="mb-3 p-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Content</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <div class="col-md-8">
+        <form class="border border-3 border-networkgrey rounded-4 w-100 mt-5 mb-5 shadow">
+          <div class="mb-2 p-3">
+            <h3 class="d-flex justify-content-center">Post Something</h3>
+            <label for="body" class="form-label"></label>
+            <textarea class="form-control" id="body" name="body" rows="3" type="text" maxlength="5000" required
+              placeholder="Post here..."></textarea>
           </div>
-          <div class="mb-3 p-3">
-            <label for="exampleFormControlInput1" class="form-label">Image URL</label>
-            <input type="url" class="form-control" id="exampleFormControlInput1" placeholder="image url here...">
+          <div class="mb-2 p-3">
+            <label for="imgUrl" class="form-label"></label>
+            <input type="url" class="form-control" id="imgUrl" name="imgUrl" maxlength="500"
+              placeholder="Add an image...">
           </div>
-        </div>
+          <div class="d-flex flex-row-reverse">
+            <button class="btn btn-outline-networkdark rounded-3 shadow"><i class="mdi mdi-send-circle-outline"
+                type="submit">Post</i></button>
+          </div>
+        </form>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -51,11 +59,18 @@ async function getPosts() {
 </template>
 
 <style scoped lang="scss">
-h2 {
-  color: rgb(134, 134, 135);
+h3 {
+  color: rgb(96, 96, 97);
 }
 
-.post-form {
+form {
   background-color: rgba(3, 52, 137, 0.705);
+
+}
+
+button {
+  margin-right: 3rem;
+  margin-bottom: 1.5rem;
+  ;
 }
 </style>
