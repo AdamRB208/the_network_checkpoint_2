@@ -23,6 +23,10 @@ class PostsService {
   async getNextPage(pageNumber) {
     const response = await api.get(`api/posts?page=${pageNumber}`)
     logger.log('Changed page', response.data)
+    const post = response.data.posts.map(pojo => new Post(pojo))
+    AppState.post = post
+    AppState.currentPage = response.data.page
+    AppState.totalPages = response.data.totalPages
   }
 
 

@@ -13,8 +13,9 @@ defineProps({
 <template>
   <div class="post-card border border-3 border-networkgrey rounded-4 p-3 mb-4">
     <div class="d-flex">
-      <img :src="postProp.creator.picture" alt="user image for `{{ postProp.creator.name }}`"
-        class="creator-img mb-4 border border-3 border-networkgrey">
+      <img
+        :src="postProp.creator.picture || 'https://em-content.zobj.net/source/apple/419/man-facepalming_1f926-200d-2642-fe0f.png'"
+        alt="user image for `{{ postProp.creator.name }}`" class="creator-img mb-4 border border-3 border-networkgrey">
       <span class="d-flex align-items-center mb-4 ms-3">{{ postProp.creator.name }}</span>
     </div>
     <img
