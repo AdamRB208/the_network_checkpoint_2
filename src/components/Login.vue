@@ -25,7 +25,8 @@ function logout() {
         <div role="button" class="bg-dark selectable no-select" data-bs-toggle="dropdown" aria-expanded="false"
           title="open account menu">
           <div v-if="account?.picture || identity?.picture">
-            <img :src="account?.picture || identity?.picture" alt="account photo" height="40" class="user-img" />
+            <img :src="account?.picture || identity?.picture" alt="account photo" height="40"
+              class="user-img rounded" />
           </div>
         </div>
         <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" role="menu" title="account menu">
@@ -53,5 +54,7 @@ function logout() {
   border-radius: 100px;
   object-fit: cover;
   object-position: center;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
 }
 </style>

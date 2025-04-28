@@ -17,7 +17,7 @@ watch(theme, () => {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-md bg-codeworks border-bottom border-vue">
+  <nav class="navbar navbar-expand-md bg-networkblue border-bottom border-networkgrey">
     <div class="container gap-2">
       <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-light">
         <span class="mdi mdi-laptop-account me-2 fs-3"></span>
@@ -32,7 +32,7 @@ watch(theme, () => {
       <div class="collapse navbar-collapse " id="navbar-links">
         <ul class="navbar-nav">
           <li>
-            <RouterLink :to="{ name: 'About' }" class="btn text-green selectable">
+            <RouterLink :to="{ name: 'About' }" class="btn btn-outline-networkgrey selectable ms-2">
               About
             </RouterLink>
           </li>
