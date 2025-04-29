@@ -40,6 +40,8 @@ async function likePost(postId) {
       <hr>
       <p class="card-text mt-3 d-flex justify-content-center">{{ postProp.body }}</p>
       <hr>
+      <button v-if="postProp.creatorId == account.id" class="btn btn-outline-networkdark" type="button"><i
+          class="mdi mdi-trash-can-outline"></i>delete</button>
       <p v-if="account" @click="likePost(postProp.id)" class="mb-0 mdi mdi-heart likes-text" type="button">{{
         postProp.likes.length }}
       </p>
