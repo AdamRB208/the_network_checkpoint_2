@@ -1,5 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import PostCard from '@/components/PostCard.vue';
+import { postsService } from '@/services/PostsService.js';
 import { profileService } from '@/services/ProfileService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
@@ -13,12 +15,16 @@ const profile = computed(() => AppState.profile)
 
 const account = computed(() => AppState.account)
 
+const posts = computed(() => AppState.post)
+
 onMounted(() => {
   getProfileById()
+  getPostsByProfileId()
 })
 
 watch(route, () => {
   getProfileById()
+  getPostsByProfileId()
 })
 
 
@@ -29,6 +35,16 @@ async function getProfileById() {
   catch (error) {
     Pop.error(error, 'Could not get profile by ID');
     logger.log('COULD NOT GET PROFILE BY ID', error)
+  }
+}
+
+async function getPostsByProfileId() {
+  try {
+    await profileService.getPostsByProfileId(route.params.profileId)
+  }
+  catch (error) {
+    Pop.error(error, 'Could not get posts by profile Id');
+    logger.log('COULD NOT GET POSTS BY PROFILE ID', error)
   }
 }
 </script>
@@ -62,6 +78,8 @@ async function getProfileById() {
           </div>
         </div>
       </div>
+      <!-- <div v-for="Post in posts" :key="Post.id" class="col-md-8">
+        <PostCard :postProp="Post" /> -->
     </div>
   </section>
 </template>

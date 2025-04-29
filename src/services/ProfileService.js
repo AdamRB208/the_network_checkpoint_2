@@ -12,6 +12,11 @@ class ProfileService {
     AppState.profile = profile
   }
 
+  async getPostsByProfileId(profileId) {
+    AppState.profile = null
+    const response = await api.get(`api/profiles/${profileId}/posts`)
+    logger.log('GOT POSTS BY PROFILE ID', response.data)
+  }
 
 }
 
