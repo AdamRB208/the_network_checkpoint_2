@@ -1,7 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import PostCard from '@/components/PostCard.vue';
-import { postsService } from '@/services/PostsService.js';
 import { profileService } from '@/services/ProfileService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
@@ -15,7 +14,7 @@ const profile = computed(() => AppState.profile)
 
 const account = computed(() => AppState.account)
 
-const posts = computed(() => AppState.post)
+const posts = computed(() => AppState.profilePosts)
 
 onMounted(() => {
   getProfileById()
@@ -73,13 +72,14 @@ async function getPostsByProfileId() {
           <div>
             <h5 class="m-3">{{ profile.bio }}</h5>
           </div>
-          <div v-if="profile?.id == account.id && account" class="d-flex flex-row-reverse me-3 mb-3">
+          <div v-if="profile?.id == account?.id && account" class="d-flex flex-row-reverse me-3 mb-3">
             <button class="btn btn-outline-networkdark" type="button">edit</button>
           </div>
         </div>
       </div>
-      <!-- <div v-for="Post in posts" :key="Post.id" class="col-md-8">
-        <PostCard :postProp="Post" /> -->
+      <div v-for="Post in posts" :key="Post.id" class="col-md-8">
+        <PostCard :postProp="Post" />
+      </div>
     </div>
   </section>
 </template>

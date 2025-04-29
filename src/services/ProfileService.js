@@ -2,6 +2,7 @@ import { logger } from "@/utils/Logger.js"
 import { api } from "./AxiosService.js"
 import { AppState } from "@/AppState.js"
 import { Profile } from "@/models/Profile.js"
+import { Post } from "@/models/Post.js"
 
 class ProfileService {
   async getProfileById(profileId) {
@@ -13,9 +14,11 @@ class ProfileService {
   }
 
   async getPostsByProfileId(profileId) {
-    AppState.profile = null
+    AppState.profilePosts = []
     const response = await api.get(`api/profiles/${profileId}/posts`)
     logger.log('GOT POSTS BY PROFILE ID', response.data)
+    AppState.profilePosts = response.data.posts.map(postData => new Post(postData))
+    logger.log('rendering profile posts', AppState.profilePosts)
   }
 
 }
