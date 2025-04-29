@@ -16,6 +16,10 @@ const account = computed(() => AppState.account)
 
 const posts = computed(() => AppState.profilePosts)
 
+const currentPage = computed(() => AppState.currentPage)
+
+const totalPages = computed(() => AppState.totalPages)
+
 onMounted(() => {
   getProfileById()
   getPostsByProfileId()
@@ -46,6 +50,18 @@ async function getPostsByProfileId() {
     logger.log('COULD NOT GET POSTS BY PROFILE ID', error)
   }
 }
+
+async function getNextProfilePage(pageNumber) {
+  try {
+    await profileService.getNextProfilePage(pageNumber)
+  }
+  catch (error) {
+    Pop.error(error, 'could not get next page');
+    logger.log('COULD NOT GET NEXT PAGE', error)
+  }
+}
+
+
 </script>
 
 
@@ -80,6 +96,15 @@ async function getPostsByProfileId() {
       <div v-for="Post in posts" :key="Post.id" class="col-md-8">
         <PostCard :postProp="Post" />
       </div>
+    </div>
+  </section>
+  <section class="container">
+    <div class="row justify-content-center">
+      <button :disabled="currentPage == 1" @click="getNextProfilePage(currentPage - 1)"
+        class="col-md-2 btn btn-outline-networkgrey mb-2">Previous</button>
+      <div class="col-md-2 text-center align-items-center mb-2">Page {{ currentPage }}</div>
+      <button :disabled="currentPage == totalPages" @click="getNextProfilePage(currentPage + 1)"
+        class="col-md-2 btn btn-outline-networkgrey mb-2">Next</button>
     </div>
   </section>
 </template>

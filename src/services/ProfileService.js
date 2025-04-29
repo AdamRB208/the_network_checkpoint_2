@@ -5,6 +5,10 @@ import { Profile } from "@/models/Profile.js"
 import { Post } from "@/models/Post.js"
 
 class ProfileService {
+  async getNextProfilePage(pageNumber) {
+    const response = await api.get(`api/profiles?query=${pageNumber}`)
+    logger.log('Changed Page!', response.data)
+  }
   async getProfileById(profileId) {
     AppState.profile = null
     const response = await api.get(`api/profiles/${profileId}`)
