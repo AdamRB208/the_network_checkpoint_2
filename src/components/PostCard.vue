@@ -98,4 +98,10 @@ small {
   aspect-ratio: 1/1;
   border-radius: 50%;
 }
+
+a {
+  color: rgb(96, 96, 97);
+  text-decoration: none;
+  display: flex;
+}
 </style>
