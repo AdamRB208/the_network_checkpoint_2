@@ -22,6 +22,20 @@ async function likePost(postId) {
   }
 }
 
+async function deletePost(postId) {
+  try {
+    const confirmed = await Pop.confirm('Are you sure you want to delete this post?', 'It will be gone forever!', 'Yes I am sure', 'Ive changed my mind')
+    if (!confirmed) {
+      return
+    }
+    await postsService.deletePost(postId)
+  }
+  catch (error) {
+    Pop.error(error, 'could not delete post');
+    logger.log('COULD NOT DELETE POST', error)
+  }
+}
+
 </script>
 
 
@@ -40,8 +54,8 @@ async function likePost(postId) {
       <hr>
       <p class="card-text mt-3 d-flex justify-content-center">{{ postProp.body }}</p>
       <hr>
-      <button v-if="postProp.creatorId == account.id" class="btn btn-outline-networkdark" type="button"><i
-          class="mdi mdi-trash-can-outline"></i>delete</button>
+      <button v-if="postProp?.creatorId == account?.id && account" @click="deletePost(postProp.id)"
+        class="btn btn-outline-networkdark" type="button"><i class="mdi mdi-trash-can-outline"></i>delete</button>
       <p v-if="account" @click="likePost(postProp.id)" class="mb-0 mdi mdi-heart likes-text" type="button">{{
         postProp.likes.length }}
       </p>
@@ -60,7 +74,6 @@ async function likePost(postId) {
 }
 
 hr {
-  // color: rgb(106, 106, 108), ;
   border: 1px solid rgb(134, 134, 135);
   opacity: 100;
 }
@@ -75,6 +88,5 @@ hr {
   height: 4em;
   aspect-ratio: 1/1;
   border-radius: 50%;
-  // margin-bottom: 1.5rem;
 }
 </style>
