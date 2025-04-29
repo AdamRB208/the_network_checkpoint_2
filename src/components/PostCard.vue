@@ -42,10 +42,13 @@ async function deletePost(postId) {
 <template>
   <div class="post-card border border-3 border-networkgrey rounded-4 p-3 mb-4 mt-4">
     <div class="d-flex">
-      <img
-        :src="postProp.creator.picture || 'https://em-content.zobj.net/source/apple/419/man-facepalming_1f926-200d-2642-fe0f.png'"
-        alt="user image for `{{ postProp.creator.name }}`" class="creator-img mb-4 border border-3 border-networkgrey">
-      <span class="d-flex align-items-center mb-4 ms-3">{{ postProp.creator.name }}</span>
+      <RouterLink :to="{ name: 'Profile', params: { profileId: postProp.creatorId } }">
+        <img
+          :src="postProp.creator.picture || 'https://em-content.zobj.net/source/apple/419/man-facepalming_1f926-200d-2642-fe0f.png'"
+          alt="user image for `{{ postProp.creator.name }}`"
+          class="creator-img mb-4 border border-3 border-networkgrey">
+        <span class="d-flex align-items-center mb-4 ms-3">{{ postProp.creator.name }}</span>
+      </RouterLink>
     </div>
     <img
       :src="postProp.imgUrl || 'https://media.istockphoto.com/id/2185543591/photo/metallic-broken-chain-symbol-illuminated-by-blue-and-magenta-lights-on-blue-and-magenta.webp?a=1&b=1&s=612x612&w=0&k=20&c=LYp_95t7cM7uAO8jGR6EAS72-rGIz1lZnWq09qV9FbA='"
