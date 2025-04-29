@@ -3,11 +3,16 @@ import { api } from "./AxiosService.js"
 import { AppState } from "@/AppState.js"
 import { Profile } from "@/models/Profile.js"
 import { Post } from "@/models/Post.js"
+import ProfilePage from "@/pages/ProfilePage.vue"
 
 class ProfileService {
-  async getNextProfilePage(pageNumber) {
-    const response = await api.get(`api/profiles?query=${pageNumber}`)
+  async getNextProfilePage(profileId, pageNumber) {
+    const response = await api.get(`api/profiles/${profileId}/posts?page=${pageNumber}`)
     logger.log('Changed Page!', response.data)
+    const post = response.data.posts.map(pojo => new Post(pojo))
+    AppState.profilePosts = post
+    AppState.currentPage = response.data.page
+    AppState.totalPages = response.data.totalPages
   }
   async getProfileById(profileId) {
     AppState.profile = null
@@ -22,6 +27,8 @@ class ProfileService {
     const response = await api.get(`api/profiles/${profileId}/posts`)
     logger.log('GOT POSTS BY PROFILE ID', response.data)
     AppState.profilePosts = response.data.posts.map(postData => new Post(postData))
+    AppState.currentPage = response.data.page
+    AppState.totalPages = response.data.totalPages
     logger.log('rendering profile posts', AppState.profilePosts)
   }
 

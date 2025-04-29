@@ -32,6 +32,7 @@ class PostsService {
   async likePost(postId) {
     const response = await api.post(`api/posts/${postId}/like`)
     logger.log('liked post', response.data)
+    // TODO find the index of the old post, create a new Post with the response.data, splice the old one out and replace it with the new one
   }
 
   async deletePost(postId) {

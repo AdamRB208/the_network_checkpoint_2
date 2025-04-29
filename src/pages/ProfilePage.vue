@@ -53,7 +53,7 @@ async function getPostsByProfileId() {
 
 async function getNextProfilePage(pageNumber) {
   try {
-    await profileService.getNextProfilePage(pageNumber)
+    await profileService.getNextProfilePage(route.params.profileId, pageNumber)
   }
   catch (error) {
     Pop.error(error, 'could not get next page');
@@ -102,7 +102,8 @@ async function getNextProfilePage(pageNumber) {
     <div class="row justify-content-center">
       <button :disabled="currentPage == 1" @click="getNextProfilePage(currentPage - 1)"
         class="col-md-2 btn btn-outline-networkgrey mb-2">Previous</button>
-      <div class="col-md-2 text-center align-items-center mb-2">Page {{ currentPage }}</div>
+      <div class="col-md-2 text-center align-items-center mb-2">Page {{ currentPage }} of {{ totalPages }}
+      </div>
       <button :disabled="currentPage == totalPages" @click="getNextProfilePage(currentPage + 1)"
         class="col-md-2 btn btn-outline-networkgrey mb-2">Next</button>
     </div>
