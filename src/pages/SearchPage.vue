@@ -8,7 +8,16 @@ const profile = computed(() => AppState.profile)
 
 
 <template>
-  <div>Search Page</div>
+  <section class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 d-flex justify-content-center">
+        <h2>Welcome to the search page!</h2>
+      </div>
+      <div class="col-md-6 d-flex justify-content-center">
+        form here
+      </div>
+    </div>
+  </section>
 </template>
 
 
