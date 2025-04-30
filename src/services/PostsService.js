@@ -5,6 +5,10 @@ import { AppState } from "@/AppState.js"
 
 
 class PostsService {
+  async searchPosts(searchQuery) {
+    const response = await api.get(`api/posts?query=${searchQuery}`)
+    logger.log('Searching posts!', response.data)
+  }
 
   async getPosts() {
     const response = await api.get('api/posts')
