@@ -1,7 +1,9 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import AdsCard from '@/components/AdsCard.vue';
 import PostCard from '@/components/PostCard.vue';
 import PostForm from '@/components/PostForm.vue';
+import { adsService } from '@/services/AdsService.js';
 import { postsService } from '@/services/PostsService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
@@ -13,9 +15,22 @@ const currentPage = computed(() => AppState.currentPage)
 
 const account = computed(() => AppState.account)
 
+const ad = computed(() => AppState.ad)
+
 onMounted(() => {
   getPosts()
+  getAds()
 })
+
+async function getAds() {
+  try {
+    await adsService.getAds()
+  }
+  catch (error) {
+    Pop.error(error, 'Could not get adds');
+    logger.log('COULD NOT GET ADDS', error)
+  }
+}
 
 async function getPosts() {
   try {
@@ -44,6 +59,9 @@ async function getNextPage(pageNumber) {
     <div class="row justify-content-center">
       <div class="col-md-8">
         <PostForm v-if="account" />
+      </div>
+      <div v-for="Ad in ad" :key="Ad.id" class="col-md-3">
+        <AdsCard :adProp="Ad" />
       </div>
     </div>
     <div class="row justify-content-center">
