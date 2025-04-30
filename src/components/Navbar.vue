@@ -36,6 +36,11 @@ watch(theme, () => {
               About
             </RouterLink> -->
           </li>
+          <li>
+            <RouterLink :to="{ name: 'Search' }" class="btn btn-outline-networkgrey selectable ms-2">
+              Search
+            </RouterLink>
+          </li>
         </ul>
         <!-- LOGIN COMPONENT HERE -->
         <div class="ms-auto">
