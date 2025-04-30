@@ -1,5 +1,7 @@
 <script setup>
 
+async function getAdds()
+
 </script>
 
 
