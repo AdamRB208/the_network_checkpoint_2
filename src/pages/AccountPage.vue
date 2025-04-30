@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { AppState } from '../AppState.js';
+import AccountForm from '@/components/AccountForm.vue';
 
 const account = computed(() => AppState.account)
 
@@ -44,6 +45,9 @@ const account = computed(() => AppState.account)
         <div v-else>
           <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
         </div>
+      </div>
+      <div class="col-md-10 d-flex justify-content-center">
+        <AccountForm />
       </div>
     </div>
   </section>
