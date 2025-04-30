@@ -13,6 +13,9 @@ const editableAccountData = ref({
   picture: '',
   resume: '',
   graduated: false,
+  linkedin: '',
+  github: '',
+  class: '',
 })
 
 onMounted(() => {
@@ -57,11 +60,23 @@ async function updateAccount() {
         <input v-model="editableAccountData.resume" type="url" id="accountResume" name="resume" maxlength="500">
       </div>
       <div class="mb-3">
+        <label for="accountLinkedin">Linkedin</label>
+        <input v-model="editableAccountData.linkedin" type="url" id="accountLinkedin" name="linkedin" maxlength="500">
+      </div>
+      <div class="mb-3">
+        <label for="accountGithub">Github</label>
+        <input v-model="editableAccountData.github" type="url" id="accountGithub" name="github" maxlength="500">
+      </div>
+      <div class="mb-3">
+        <label for="accountClass">CodeWorks Class</label>
+        <input v-model="editableAccountData.class" type="text" name="class" id="accountClass" maxlength="100">
+      </div>
+      <div class="mb-3">
         <label for="accountGraduated" class="d-inline me-3">Graduated?</label>
         <input v-model="editableAccountData.graduated" type="checkbox" id="accountGraduated" name="graduated">
       </div>
       <div class="text-end">
-        <button class="btn btn-indigo" type="submit">Submit</button>
+        <button class="btn btn-networkgrey" type="submit">Submit</button>
       </div>
     </form>
   </div>

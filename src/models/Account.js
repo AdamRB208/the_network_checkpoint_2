@@ -9,6 +9,9 @@ export class Account {
    * @property {string} bio
    * @property {string} class
    * @property {string} graduated
+   *  @property {string} linkedin
+   * @property {string} github
+   * @property {string} resume
    * 
    * @param {AccountData} data
    */
@@ -21,6 +24,9 @@ export class Account {
     this.bio = data.bio
     this.class = data.class
     this.graduated = data.graduated
+    this.linkedin = data.linkedin
+    this.github = data.github
+    this.resume = data.resume
     // TODO add additional properties if needed
   }
 }

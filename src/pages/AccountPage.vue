@@ -19,25 +19,26 @@ const account = computed(() => AppState.account)
   </section>
   <section>
     <div class="row justify-content-center">
-      <div class="col-md-10 about text-center">
+      <div class="col-md-10 about text-center border border-3 border-networkgrey rounded-4 mt-2 mb-4 shadow">
         <div v-if="account">
           <div>
             <span>
-              <h1 class="m-3">Welcome {{ account.name }}</h1>
+              <h1 class="m-3 text-networkgrey">Welcome {{ account.name }}</h1>
             </span>
             <img :src="account.coverImg" alt="" class="cover-img">
           </div>
           <div class="d-flex flex-row align-items-center justify-content-center account-card">
             <img class="account-img m-5 d-flex justify-content-start" :src="account.picture" alt="">
-            <span>
+            <span class="text-networkgrey">
               <ul>Email: {{ account.email }}</ul>
               <ul>CodeWorks Class: {{ account.class }}</ul>
               <ul>Graduated: {{ account.graduated }}</ul>
-              <ul>Links: <i class="mdi mdi-github" type="button"></i><i class="mdi mdi-linkedin" type="button"></i><i
-                  class="mdi mdi-file-account" type="button"></i></ul>
+              <ul>Links: <a :href:="account.github" class="mdi mdi-github fs-4" type="button"></a><a
+                  :href:="account.linkedin"><i class="mdi mdi-linkedin fs-4" type="button"></i></a><a
+                  :href:="account.resume"><i class="mdi mdi-file-account fs-4" type="button"></i></a></ul>
             </span>
           </div>
-          <div>
+          <div class="mb-4 text-networkgrey">
             <h4>Bio</h4>
             <p>{{ account.bio }}</p>
           </div>
@@ -46,8 +47,12 @@ const account = computed(() => AppState.account)
           <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
         </div>
       </div>
-      <div class="col-md-10 d-flex justify-content-center">
+      <div v-if="account"
+        class="col-md-6 d-flex justify-content-center border border-3 border-networkgrey rounded-4 mt-4 shadow">
         <AccountForm />
+      </div>
+      <div v-else>
+        <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
       </div>
     </div>
   </section>
