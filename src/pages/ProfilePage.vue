@@ -84,6 +84,7 @@ async function getNextProfilePage(pageNumber) {
           </div>
           <div class="ms-4 mt-2">
             <small>{{ profile.class }}</small>
+            <span v-if="profile.graduated" class="mdi mdi-account-school-outline ms-2 fs-4"></span>
           </div>
           <div>
             <h5 class="m-3">{{ profile.bio }}</h5>
