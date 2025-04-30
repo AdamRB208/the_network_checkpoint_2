@@ -8,6 +8,8 @@ class PostsService {
   async searchPosts(searchQuery) {
     const response = await api.get(`api/posts?query=${searchQuery}`)
     logger.log('Searching posts!', response.data)
+    const posts = response.data.posts.map(pojo => new Post(pojo))
+    AppState.postsSearchQuery = posts
   }
 
   async getPosts() {

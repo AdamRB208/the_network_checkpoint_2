@@ -1,10 +1,13 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import PostCard from '@/components/PostCard.vue';
 import SearchForm from '@/components/SearchForm.vue';
 import { computed } from 'vue';
 
+const posts = computed(() => AppState.post)
 
 const profile = computed(() => AppState.profile)
+
 </script>
 
 
@@ -16,6 +19,13 @@ const profile = computed(() => AppState.profile)
       </div>
       <div class="col-md-6 d-flex justify-content-center">
         <SearchForm />
+      </div>
+    </div>
+  </section>
+  <section class="container">
+    <div class="row">
+      <div v-for="Post in posts" :key="Post.id" class="col-md-6">
+        <PostCard :post="Post" />
       </div>
     </div>
   </section>

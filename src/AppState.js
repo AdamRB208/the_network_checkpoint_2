@@ -24,6 +24,9 @@ export const AppState = reactive({
 
   totalPages: 11,
 
+  postsSearchQuery: '',
+
+  profileSearchQuery: '',
 
 })
 
