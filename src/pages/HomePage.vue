@@ -55,22 +55,26 @@ async function getNextPage(pageNumber) {
 </script>
 
 <template>
-  <section class="container">
-    <div class="row justify-content-center">
+  <section class="container-fluid">
+    <div class="row justify-content-start ms-5">
       <div class="col-md-8">
         <PostForm v-if="account" />
       </div>
-      <div v-for="Ad in ad" :key="Ad.id" class="col-md-3">
-        <AdsCard :adProp="Ad" />
-      </div>
     </div>
-    <div class="row justify-content-center">
-      <div v-for="Post in posts" :key="Post.id" class="col-md-8">
+  </section>
+  <section class="container-fluid d-flex justify-content-between">
+    <div class="row col-md-8 w-75 ms-5">
+      <div v-for="Post in posts" :key="Post.id" class="col-md-8 w-100">
         <PostCard :postProp="Post" />
       </div>
     </div>
+    <div class="row col-md-2 d-block ">
+      <div v-for="Ad in ad" :key="Ad.id" class="col-md-2 w-100 ads-card">
+        <AdsCard :adProp="Ad" />
+      </div>
+    </div>
   </section>
-  <section class="container">
+  <section class="container-fluid">
     <div class="row justify-content-center">
       <button :disabled="currentPage == 1" @click="getNextPage(currentPage - 1)"
         class="col-md-2 btn btn-outline-networkgrey mb-2">Previous</button>

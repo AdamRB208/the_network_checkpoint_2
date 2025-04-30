@@ -26,7 +26,11 @@ async function getAds() {
 
 
 <template>
-  <div>{{ adProp }}</div>
+  <div class="d-flex flex-column align-items-center mt-3 border rounded border-networkgrey bg-networkgrey shadow">
+    <h3>{{ adProp.title }}</h3>
+    <img :src="adProp.tall" alt="" class="w-100">
+    <img :src="adProp.linkUrl" alt="" class="w-100">
+  </div>
 </template>
 
 
