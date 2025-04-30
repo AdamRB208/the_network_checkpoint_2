@@ -7,17 +7,28 @@ const account = computed(() => AppState.account)
 </script>
 
 <template>
-  <section class="container">
+  <section class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="edit-btn">
+          <button class="btn btn-outline-networkgrey" type="button">Edit</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
     <div class="row justify-content-center">
       <div class="col-md-10 about text-center">
         <div v-if="account">
           <div>
-            <h1 class="m-3">Welcome {{ account.name }}</h1>
+            <span>
+              <h1 class="m-3">Welcome {{ account.name }}</h1>
+            </span>
             <img :src="account.coverImg" alt="" class="cover-img">
           </div>
-          <div class="d-flex flex-row align-items-center">
+          <div class="d-flex flex-row align-items-center justify-content-center account-card">
             <img class="account-img m-5 d-flex justify-content-start" :src="account.picture" alt="">
-            <span class="">
+            <span>
               <ul>Email: {{ account.email }}</ul>
               <ul>CodeWorks Class: {{ account.class }}</ul>
               <ul>Graduated: {{ account.graduated }}</ul>
@@ -50,5 +61,13 @@ const account = computed(() => AppState.account)
   height: 8em;
   aspect-ratio: 1/1;
   border-radius: 50%;
+}
+
+.edit-btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 3em;
+  margin-top: 1em;
 }
 </style>
