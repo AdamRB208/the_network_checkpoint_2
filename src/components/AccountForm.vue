@@ -17,7 +17,7 @@ const editableAccountData = ref({
 
 onMounted(() => {
   const account = AppState.account
-  // editableAccountData.value = { ...account }
+  editableAccountData.value = { ...account }
 })
 
 async function updateAccount() {
