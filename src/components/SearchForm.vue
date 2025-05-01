@@ -1,5 +1,6 @@
 <script setup>
 import { postsService } from '@/services/PostsService.js';
+import { profileService } from '@/services/ProfileService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
 import { ref } from 'vue';
@@ -20,6 +21,18 @@ async function searchPosts() {
   }
 }
 
+async function searchProfiles() {
+  try {
+    logger.log('searching for', editableProfileSearch.value)
+    await profileService.searchProfiles(editableProfileSearch.value)
+    editableProfileSearch.value = ''
+  }
+  catch (error) {
+    Pop.error(error, 'Could not search profiles');
+    logger.log('COULD NOT SEARCH PROFILES', error)
+  }
+}
+
 </script>
 
 
@@ -35,7 +48,7 @@ async function searchPosts() {
       </div>
     </div>
   </form>
-  <form>
+  <form @submit.prevent="searchProfiles">
     <div class="mb-3">
       <label for="profile">Search Profiles</label>
       <input v-model="editableProfileSearch" type="text" name="profileData" id="profileData" maxlength="100">

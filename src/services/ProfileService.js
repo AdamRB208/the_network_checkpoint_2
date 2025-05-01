@@ -3,9 +3,14 @@ import { api } from "./AxiosService.js"
 import { AppState } from "@/AppState.js"
 import { Profile } from "@/models/Profile.js"
 import { Post } from "@/models/Post.js"
-import ProfilePage from "@/pages/ProfilePage.vue"
 
 class ProfileService {
+
+  async searchProfiles(searchQuery) {
+    const response = await api.get(`api/profiles?query=${searchQuery}`)
+    logger.log('Searching profiles!', response.data)
+  }
+
   async getNextProfilePage(profileId, pageNumber) {
     const response = await api.get(`api/profiles/${profileId}/posts?page=${pageNumber}`)
     logger.log('Changed Page!', response.data)

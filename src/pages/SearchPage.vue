@@ -23,10 +23,16 @@ const profile = computed(() => AppState.profile)
     </div>
   </section>
   <section class="container">
-    <div class="row">
+    <div class="row justify-content-center">
       <div v-for="Post in posts" :key="Post.id" class="col-md-6">
-        <PostCard :post="Post" />
+        <PostCard :postProp="Post" />
       </div>
+      <div v-if="profile" class="col-md-6">
+        <div>{{ profile.bio }}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div>page nav will go here</div>
     </div>
   </section>
 </template>
