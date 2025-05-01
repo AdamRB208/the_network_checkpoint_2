@@ -49,11 +49,11 @@ async function searchProfiles() {
     </div>
   </form>
   <form @submit.prevent="searchProfiles">
-    <div class="mb-3">
+    <div class="mb-3 ms-4">
       <label for="profile">Search Profiles</label>
       <input v-model="editableProfileSearch" type="text" name="profileData" id="profileData" maxlength="100">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 ms-4">
       <button class="btn btn-networkgrey" type="submit">Submit</button>
     </div>
   </form>

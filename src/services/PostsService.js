@@ -8,8 +8,9 @@ class PostsService {
 
   async getNextSearchedPage(searchQuery, pageNumber) {
     const response = await api.get(`api/posts?query=${searchQuery}/${pageNumber}`)
-    logger.log('Changed page', response.data)
+    logger.log('Changed search page', response.data, pageNumber)
     const post = response.data.posts.map(pojo => new Post(pojo))
+    logger.log('page numbers', AppState.totalPages)
     AppState.post = post
     AppState.currentPage = response.data.page
     AppState.totalPages = response.data.totalPages

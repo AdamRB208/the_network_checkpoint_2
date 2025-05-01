@@ -1,51 +1,15 @@
 <script setup>
-import { AppState } from '@/AppState.js'
 import { Profile } from '@/models/Profile.js'
 import { profileService } from '@/services/ProfileService.js'
 import { logger } from '@/utils/Logger.js'
 import { Pop } from '@/utils/Pop.js'
-import { computed } from 'vue'
 
-
-const currentPage = computed(() => AppState.currentPage)
-
-const totalPages = computed(() => AppState.totalPages)
-
-
-// onMounted(() => {
-//   getProfileById()
-//   getPostsByProfileId()
-// })
-
-// watch(route, () => {
-//   getProfileById()
-//   getPostsByProfileId()
-// })
 
 
 defineProps({
   profileProp: { type: Profile, required: true }
 })
 
-// async function getProfileById() {
-//   try {
-//     await profileService.getProfileById(route.params.profileId)
-//   }
-//   catch (error) {
-//     Pop.error(error, 'Could not get profile by ID');
-//     logger.log('COULD NOT GET PROFILE BY ID', error)
-//   }
-// }
-
-// async function getPostsByProfileId() {
-//   try {
-//     await profileService.getPostsByProfileId(route.params.profileId)
-//   }
-//   catch (error) {
-//     Pop.error(error, 'Could not get posts by profile Id');
-//     logger.log('COULD NOT GET POSTS BY PROFILE ID', error)
-//   }
-// }
 
 async function getNextProfilePage(pageNumber) {
   try {
@@ -84,12 +48,12 @@ async function getNextProfilePage(pageNumber) {
       </div>
     </div>
   </div>
-  <button :disabled="currentPage == 1" @click="getNextProfilePage(currentPage - 1)"
+  <!-- <button :disabled="currentPage == 1" @click="getNextProfilePage(currentPage - 1)"
     class="col-md-2 btn btn-outline-networkgrey mb-2">Previous</button>
   <div class="col-md-2 text-center align-items-center mb-2">Page {{ currentPage }} of {{ totalPages }}
   </div>
   <button :disabled="currentPage == totalPages" @click="getNextProfilePage(currentPage + 1)"
-    class="col-md-2 btn btn-outline-networkgrey mb-2">Next</button>
+    class="col-md-2 btn btn-outline-networkgrey mb-2">Next</button> -->
 </template>
 
 

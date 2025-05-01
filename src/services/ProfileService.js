@@ -9,8 +9,11 @@ class ProfileService {
   async searchProfiles(searchQuery) {
     const response = await api.get(`api/profiles?query=${searchQuery}`)
     logger.log('Searching profiles!', response.data)
-    const profiles = response.data.profiles.map(pojo => new Profile(pojo))
-    AppState.profileSearchQuery = profiles
+    const profiles = response.data.map(pojo => new Profile(pojo))
+    logger.log('mapping profiles', profiles)
+    AppState.profile = profiles
+    AppState.currentPage = response.data.page
+    AppState.totalPages = response.data.totalPages
   }
 
   async getNextProfilePage(profileId, pageNumber) {

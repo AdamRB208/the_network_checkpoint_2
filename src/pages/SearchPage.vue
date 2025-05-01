@@ -22,6 +22,7 @@ const ad = computed(() => AppState.ad)
 
 onMounted(() => {
   getAds()
+  AppState.post = []
 })
 
 
@@ -61,25 +62,25 @@ async function getAds() {
   </section>
   <section class="container-fluid d-flex justify-content-center">
     <div class="row col-md-8">
-      <div v-for="Post in posts" :key="Post.id" class="col-md-5">
+      <div v-for="Post in posts" :key="Post.id" class="col-md-8">
         <PostCard :postProp="Post" />
       </div>
       <div v-for="Profile in profile" :key="Profile.id" class="col-md-8">
         <ProfileCard :profileProp="Profile" />
       </div>
     </div>
-    <div class="row col-md-2 d-block ">
+    <div class="row col-md-3 d-block ">
       <div v-for="Ad in ad" :key="Ad.id" class="col-md-2 w-100 ads-card">
         <AdsCard :adProp="Ad" />
       </div>
     </div>
   </section>
   <section>
-    <div class="row justify-content-center">
-      <button :disabled="currentPage == 1" @click="getNextSearchedPage(currentPage - 1)"
+    <div class="row justify-content-center mt-3">
+      <button :disabled="currentPage == 1" @click.prevent="getNextSearchedPage(currentPage - 1)"
         class="col-md-2 btn btn-outline-networkgrey mb-2">Previous</button>
       <div class="col-md-2 text-center align-items-center mb-2">Page {{ currentPage }} of {{ totalPages }}</div>
-      <button :disabled="currentPage == totalPages" @click="getNextSearchedPage(currentPage + 1)"
+      <button :disabled="currentPage == totalPages" @click.prevent="getNextSearchedPage(currentPage + 1)"
         class="col-md-2 btn btn-outline-networkgrey mb-2">Next</button>
     </div>
   </section>
