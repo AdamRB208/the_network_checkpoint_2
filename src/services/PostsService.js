@@ -5,11 +5,23 @@ import { AppState } from "@/AppState.js"
 
 
 class PostsService {
+
+  async getNextSearchedPage(searchQuery, pageNumber) {
+    const response = await api.get(`api/posts?query=${searchQuery}/${pageNumber}`)
+    logger.log('Changed page', response.data)
+    const post = response.data.posts.map(pojo => new Post(pojo))
+    AppState.post = post
+    AppState.currentPage = response.data.page
+    AppState.totalPages = response.data.totalPages
+  }
+
   async searchPosts(searchQuery) {
     const response = await api.get(`api/posts?query=${searchQuery}`)
     logger.log('Searching posts!', response.data)
     const posts = response.data.posts.map(pojo => new Post(pojo))
     AppState.post = posts
+    AppState.currentPage = response.data.page
+    AppState.totalPages = response.data.totalPages
   }
 
   async getPosts() {

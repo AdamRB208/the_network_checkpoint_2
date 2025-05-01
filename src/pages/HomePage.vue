@@ -22,6 +22,8 @@ onMounted(() => {
   getAds()
 })
 
+
+
 async function getAds() {
   try {
     await adsService.getAds()

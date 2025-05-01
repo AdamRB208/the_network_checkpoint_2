@@ -28,7 +28,7 @@ const routes = [
     component: loadPage('ProfilePage'),
   },
   {
-    path: '',
+    path: '/search',
     name: 'Search',
     component: loadPage('SearchPage'),
   }
