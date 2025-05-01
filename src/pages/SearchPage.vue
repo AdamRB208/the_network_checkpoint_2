@@ -1,12 +1,14 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import AdsCard from '@/components/AdsCard.vue';
 import PostCard from '@/components/PostCard.vue';
 import ProfileCard from '@/components/ProfileCard.vue';
 import SearchForm from '@/components/SearchForm.vue';
+import { adsService } from '@/services/AdsService.js';
 import { postsService } from '@/services/PostsService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 
 const posts = computed(() => AppState.post)
 
@@ -16,6 +18,12 @@ const currentPage = computed(() => AppState.currentPage)
 
 const totalPages = computed(() => AppState.totalPages)
 
+const ad = computed(() => AppState.ad)
+
+onMounted(() => {
+  getAds()
+})
+
 
 async function getNextSearchedPage(pageNumber) {
   try {
@@ -24,6 +32,16 @@ async function getNextSearchedPage(pageNumber) {
   catch (error) {
     Pop.error(error, 'could not get next page');
     logger.log('COULD NOT GET NEXT PAGE', error)
+  }
+}
+
+async function getAds() {
+  try {
+    await adsService.getAds()
+  }
+  catch (error) {
+    Pop.error(error, 'Could not get adds');
+    logger.log('COULD NOT GET ADDS', error)
   }
 }
 
@@ -41,15 +59,22 @@ async function getNextSearchedPage(pageNumber) {
       </div>
     </div>
   </section>
-  <section class="container">
-    <div class="row justify-content-center">
-      <div v-for="Post in posts" :key="Post.id" class="col-md-6">
+  <section class="container-fluid d-flex justify-content-center">
+    <div class="row col-md-8">
+      <div v-for="Post in posts" :key="Post.id" class="col-md-5">
         <PostCard :postProp="Post" />
       </div>
-      <div v-for="Profile in profile" :key="Profile.id" class="col-md-6">
+      <div v-for="Profile in profile" :key="Profile.id" class="col-md-8">
         <ProfileCard :profileProp="Profile" />
       </div>
     </div>
+    <div class="row col-md-2 d-block ">
+      <div v-for="Ad in ad" :key="Ad.id" class="col-md-2 w-100 ads-card">
+        <AdsCard :adProp="Ad" />
+      </div>
+    </div>
+  </section>
+  <section>
     <div class="row justify-content-center">
       <button :disabled="currentPage == 1" @click="getNextSearchedPage(currentPage - 1)"
         class="col-md-2 btn btn-outline-networkgrey mb-2">Previous</button>

@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import AdsCard from '@/components/AdsCard.vue';
 import PostCard from '@/components/PostCard.vue';
 import { profileService } from '@/services/ProfileService.js';
 import { logger } from '@/utils/Logger.js';
@@ -19,6 +20,8 @@ const posts = computed(() => AppState.profilePosts)
 const currentPage = computed(() => AppState.currentPage)
 
 const totalPages = computed(() => AppState.totalPages)
+
+const ad = computed(() => AppState.ad)
 
 onMounted(() => {
   getProfileById()
@@ -94,8 +97,17 @@ async function getNextProfilePage(pageNumber) {
           </div>
         </div>
       </div>
-      <div v-for="Post in posts" :key="Post.id" class="col-md-8">
+    </div>
+  </section>
+  <section class="container-fluid d-flex justify-content-center">
+    <div class="row col-md-10">
+      <div v-for="Post in posts" :key="Post.id" class="col-md-10 ms-5">
         <PostCard :postProp="Post" />
+      </div>
+    </div>
+    <div class="row col-md-2 d-block ">
+      <div v-for="Ad in ad" :key="Ad.id" class="col-md-2 w-100 ads-card ms-4">
+        <AdsCard :adProp="Ad" />
       </div>
     </div>
   </section>

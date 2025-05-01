@@ -65,7 +65,7 @@ async function getNextPage(pageNumber) {
     </div>
   </section>
   <section class="container-fluid d-flex justify-content-between">
-    <div class="row col-md-8 w-75 ms-5">
+    <div class="row col-md-8 ms-5">
       <div v-for="Post in posts" :key="Post.id" class="col-md-8 w-100">
         <PostCard :postProp="Post" />
       </div>

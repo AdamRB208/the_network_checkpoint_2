@@ -1,9 +1,29 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import AccountForm from '@/components/AccountForm.vue';
+import AdsCard from '@/components/AdsCard.vue';
+import { adsService } from '@/services/AdsService.js';
+import { Pop } from '@/utils/Pop.js';
+import { logger } from '@/utils/Logger.js';
 
 const account = computed(() => AppState.account)
+
+const ad = computed(() => AppState.ad)
+
+onMounted(() => {
+  getAds()
+})
+
+async function getAds() {
+  try {
+    await adsService.getAds()
+  }
+  catch (error) {
+    Pop.error(error, 'Could not get adds');
+    logger.log('COULD NOT GET ADDS', error)
+  }
+}
 
 </script>
 
@@ -47,12 +67,21 @@ const account = computed(() => AppState.account)
           <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
         </div>
       </div>
+    </div>
+  </section>
+  <section class="container-fluid d-flex justify-content-center">
+    <div class="row col-md-8">
       <div v-if="account"
         class="col-md-6 d-flex justify-content-center border border-3 border-networkgrey rounded-4 mt-4 shadow">
         <AccountForm />
       </div>
       <div v-else>
         <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
+      </div>
+    </div>
+    <div class="row col-md-2 d-block ">
+      <div v-for="Ad in ad" :key="Ad.id" class="col-md-2 w-100 ads-card">
+        <AdsCard :adProp="Ad" />
       </div>
     </div>
   </section>
