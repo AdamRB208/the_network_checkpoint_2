@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import PostCard from '@/components/PostCard.vue';
+import ProfileCard from '@/components/ProfileCard.vue';
 import SearchForm from '@/components/SearchForm.vue';
 import { computed } from 'vue';
 
@@ -27,12 +28,12 @@ const profile = computed(() => AppState.profile)
       <div v-for="Post in posts" :key="Post.id" class="col-md-6">
         <PostCard :postProp="Post" />
       </div>
-      <div v-if="profile" class="col-md-6">
-        <div>{{ profile.bio }}</div>
+      <div v-for="Profile in profile" :key="Profile.id" class="col-md-6">
+        <ProfileCard :profileProp="Profile" />
       </div>
     </div>
     <div class="row">
-      <div>page nav will go here</div>
+      <!-- <div>page nav will go here</div> -->
     </div>
   </section>
 </template>
