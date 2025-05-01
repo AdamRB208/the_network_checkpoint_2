@@ -4,7 +4,7 @@ export class Profile {
     this.name = data.name
     this.picture = data.picture
     this.coverImg = data.coverImg
-    this.id = data.id
+    this.id = data.id || data._id
     this.bio = data.bio
     this.email = data.email
     this.linkedin = data.linkedin
